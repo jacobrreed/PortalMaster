@@ -1,0 +1,5 @@
+<Bindings>
+	<Binding name="TOGGLE_PORTALMASTER" header="PORTALMASTER" category="ADDONS">
+		PortalMaster:ToggleFrame();
+	</Binding>
+</Bindings>
