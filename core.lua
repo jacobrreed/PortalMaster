@@ -66,14 +66,14 @@ local MagePortSpells = {
 		{	-- Dalaran
 			teleport 	= 53140,
 			portal 		= 53142,
-			alias		= {},
-			priority	= true,
+			alias		= {"nr", "wrath", "old"},
+			priority	= 2,
 		},
 		{	-- Ancient Dalaran
 			teleport 	= 120145,
 			portal 		= 120146,
 			alias		= {"crater", "alterac"},
-			priority	= false,
+			priority	= 1,
 		},
 		
 		{	-- Tol Barad
@@ -91,6 +91,18 @@ local MagePortSpells = {
 			teleport 	= 176248,
 			portal 		= 176246,
 			alias		= {"ss", "ashran"},
+		},
+		
+		{	-- Dalaran - Broken Isles
+			teleport 	= 224869,
+			portal 		= 224871,
+			alias		= {"bi"},
+			priority	= 3,
+		},
+		{	-- Class Hall
+			teleport 	= 193759,
+			portal 		= nil, -- No portal to class hall
+			alias		= {"class"},
 		},
 	},
 	
@@ -129,14 +141,14 @@ local MagePortSpells = {
 		{	-- Dalaran
 			teleport	= 53140,
 			portal		= 53142,
-			alias		= {},
-			priority	= true,
+			alias		= {"nr", "wrath", "old"},
+			priority	= 2,
 		},
 		{	-- Ancient Dalaran
 			teleport	= 120145,
 			portal		= 120146,
 			alias		= {"crater", "alterac"},
-			priority	= false,
+			priority	= 1,
 		},
 		
 		{	-- Tol Barad
@@ -153,6 +165,18 @@ local MagePortSpells = {
 			teleport	= 176242,
 			portal		= 176244,
 			alias		= {"ws", "ashran"},
+		},
+		
+		{	-- Dalaran - Broken Isles
+			teleport 	= 224869,
+			portal 		= 224871,
+			alias		= {"bi"},
+			priority	= 3,
+		},
+		{	-- Class Hall
+			teleport 	= 193759,
+			portal 		= nil, -- No portal to class hall
+			alias		= {"class"},
 		},
 	},
 };
@@ -174,8 +198,6 @@ function Addon:OnInitialize()
 end
 
 function Addon:SlashHandler(message)
-	-- local action, prefill = strsplit(" ", strtrim(strlower(message or "")), 2);
-	
 	Addon:OpenFrame(strtrim(message));
 end
 
@@ -363,7 +385,7 @@ function Addon:SearchSpells(searchText, matchMode)
 	
 	for index, data in ipairs(MagePortSpells[FACTION_NAME]) do
 		local spellID = data.teleport;
-		if(matchMode == PM_MATCH_PORTAL) then
+		if(matchMode == PM_MATCH_PORTAL and data.portal) then
 			spellID = data.portal;
 		end
 		
@@ -394,7 +416,7 @@ function Addon:SearchSpells(searchText, matchMode)
 			if(a == nil) then return true end
 			if(b == nil) then return false end
 			
-			return (a.data.alias and 1 or 0) > (b.data.alias and 1 or 0) or (a.data.priority and 1 or 0) > (b.data.priority and 1 or 0);
+			return (a.data.priority and a.data.priority or 0) > (b.data.priority and b.data.priority or 0) or (a.data.alias and 1 or 0) > (b.data.alias and 1 or 0);
 		end);
 	end
 	
