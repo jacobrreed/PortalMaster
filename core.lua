@@ -416,7 +416,7 @@ function Addon:SearchSpells(searchText, matchMode)
 			if(a == nil) then return true end
 			if(b == nil) then return false end
 			
-			return (a.data.priority and a.data.priority or 0) > (b.data.priority and b.data.priority or 0) or (a.data.alias and 1 or 0) > (b.data.alias and 1 or 0);
+			return (a.data.priority or 0) > (b.data.priority or 0) or (a.data.alias and 1 or 0) > (b.data.alias and 1 or 0);
 		end);
 	end
 	
