@@ -214,6 +214,8 @@ function Addon:OnEnable()
 		if(not Addon:IsBindingSet() and not PortalMasterKeybindAlert) then
 			StaticPopup_Show("PORTALMASTER_NO_KEYBIND");
 		end
+		
+		Addon.NoResult = true;
 	end
 end
 
@@ -258,6 +260,7 @@ end
 
 function Addon:ResetSearch(prefill)
 	PortalMasterFrameSearch:SetText(prefill or "");
+	PortalMasterFrameSearch:HighlightText(0, strlen(prefill or ""));
 	
 	if(prefill) then
 		Addon:UpdateSearch();
@@ -288,6 +291,13 @@ end
 
 function PortalMaster_OnEnterPressed(self)
 	if(not PortalMasterFrame:IsShown()) then return end
+	if(Addon.NoResult) then return end
+	
+	local searchText = strtrim(strlower(self:GetText()));
+	if(strlen(searchText) == 0) then
+		Addon:CloseFrame();
+		return;
+	end
 	
 	Addon:CreateTemporaryBinding();
 	
@@ -347,6 +357,8 @@ function PortalMaster_OnTextChanged(self)
 		PortalMasterFrameSearch.Instructions:SetText("Search Portal");
 	end
 	
+	Addon.NoResult = true;
+	
 	if(strlen(searchText) > 0) then
 		local spellMatches = Addon:SearchSpells(searchText, Addon.MatchMode);
 		
@@ -365,6 +377,7 @@ function PortalMaster_OnTextChanged(self)
 			
 			PortalMasterFrameSpellButton:Show();
 			
+			Addon.NoResult = false;
 			return;
 		else
 			PortalMasterFrameSpellName:SetText("No Result");
