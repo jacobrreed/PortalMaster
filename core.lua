@@ -404,21 +404,22 @@ function Addon:SearchSpells(searchText, matchMode)
 		
 		if(IsSpellKnown(spellID)) then
 			local spellName, _, icon = GetSpellInfo(spellID);
-			
-			local searchSpellName = gsub(spellName, "Teleport: ", "");
-			searchSpellName = gsub(searchSpellName, "Portal: ", "");
-			
-			if(data.alias) then
-				searchSpellName = searchSpellName .. " " .. table.concat(data.alias, " ");
-			end
-			
-			local spellFound = true;
-			for _, token in ipairs(tokens) do
-				spellFound = spellFound and strmatch(strlower(searchSpellName), token);
-			end
-			
-			if(spellFound) then
-				tinsert(matches, { data = data, spellID = spellID, });
+			if(spellName) then
+				local searchSpellName = gsub(spellName, "Teleport: ", "");
+				searchSpellName = gsub(searchSpellName, "Portal: ", "");
+				
+				if(data.alias) then
+					searchSpellName = searchSpellName .. " " .. table.concat(data.alias, " ");
+				end
+				
+				local spellFound = true;
+				for _, token in ipairs(tokens) do
+					spellFound = spellFound and strmatch(strlower(searchSpellName), token);
+				end
+				
+				if(spellFound) then
+					tinsert(matches, { data = data, spellID = spellID, });
+				end
 			end
 		end
 	end
