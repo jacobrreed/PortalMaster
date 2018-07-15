@@ -1,3 +1,6 @@
+## 3.0.0
+* Updated for Battle for Azeroth.
+
 ## 2.0.1
 * TOC bump.
 
