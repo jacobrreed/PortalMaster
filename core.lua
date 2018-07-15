@@ -15,7 +15,6 @@ StaticPopupDialogs["PORTALMASTER_NO_KEYBIND"] = {
 	button2 = NO,
 	button3 = "Don't Ask Again",
 	OnAccept = function(self)
-		PlaySound("igMainMenuOption");
 		KeyBindingFrame_LoadUI();
 		KeyBindingFrame.mode = 1;
 		ShowUIPanel(KeyBindingFrame);
@@ -104,6 +103,12 @@ local MagePortSpells = {
 			portal 		= nil, -- No portal to class hall
 			alias		= {"class"},
 		},
+		
+		{	-- Boralus
+			teleport 	= 281403,
+			portal 		= 281400,
+			alias		= {"kt"},
+		},
 	},
 	
 	Horde 		= {
@@ -177,6 +182,12 @@ local MagePortSpells = {
 			teleport 	= 193759,
 			portal 		= nil, -- No portal to class hall
 			alias		= {"class"},
+		},
+		
+		{	-- Dazar'alor
+			teleport 	= 281404,
+			portal 		= 281402,
+			alias		= {"da"},
 		},
 	},
 };
