@@ -109,6 +109,12 @@ local MagePortSpells = {
 			portal 		= 281400,
 			alias		= {"kt"},
 		},
+
+		{ -- Oribos
+			teleport	= 344587,
+			portal		= 344597,
+			alias		= {"ob"}
+		},
 	},
 	
 	Horde 		= {
@@ -188,6 +194,12 @@ local MagePortSpells = {
 			teleport 	= 281404,
 			portal 		= 281402,
 			alias		= {"da"},
+		},
+
+		{ -- Oribos
+			teleport	= 344587,
+			portal		= 344597,
+			alias		= {"ob"}
 		},
 	},
 };

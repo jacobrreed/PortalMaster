@@ -1,3 +1,6 @@
+## 4.0.0
+* Updated for Shadowlands
+
 ## 3.0.0
 * Updated for Battle for Azeroth.
 
