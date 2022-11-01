@@ -53,7 +53,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<Button name="$parentSpellButton" inherits="SecureActionButtonTemplate">
+			<Button name="$parentSpellButton" inherits="SecureActionButtonTemplate">				
 				<Size x="48" y="48"/>
 				<Anchors>
 					<Anchor point="TOP" relativePoint="TOP"/>
@@ -85,7 +85,13 @@
 					</Layer>
 				</Layers>
 				<Scripts>
+					<!--https://github.com/Stanzilla/WoWUIBugs/issues/307-->
+					<PreClick>
+						self.savedVar = C_CVar.GetCVarBool("ActionButtonUseKeyDown")
+						C_CVar.SetCVar("ActionButtonUseKeyDown", "0")
+					</PreClick>
 					<PostClick>
+						C_CVar.SetCVar("ActionButtonUseKeyDown", self.savedVar and "1" or "0")
 						PortalMaster:CloseFrame();
 					</PostClick>
 				</Scripts>
