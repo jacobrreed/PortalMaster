@@ -115,6 +115,11 @@ local MagePortSpells = {
 			portal		= 344597,
 			alias		= {"ob"}
 		},
+		{ -- Valdraken
+			teleport 	= 395277,
+			portal 		= 395289,
+			alias 		= {	"vd"}
+		}
 	},
 	
 	Horde 		= {
@@ -201,6 +206,11 @@ local MagePortSpells = {
 			portal		= 344597,
 			alias		= {"ob"}
 		},
+		{ -- Valdraken
+			teleport 	= 395277,
+			portal 		= 395289,
+			alias 		= {	"vd"}
+		}
 	},
 };
 
