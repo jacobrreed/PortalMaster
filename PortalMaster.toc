@@ -1,4 +1,4 @@
-## Interface: 100002
+## Interface: 100200
 ## Title: PortalMaster
 ## Notes: Helper for teleport and portal spell casting
 ## Author: Sonaza, Sean111

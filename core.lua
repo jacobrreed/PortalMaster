@@ -32,6 +32,36 @@ local PM_MATCH_TELEPORT = 0x1;
 local PM_MATCH_PORTAL 	= 0x2;
 
 local MagePortSpells = {
+	Common = {
+		{	-- Dalaran
+			teleport 	= 53140,
+			portal 		= 53142,
+			alias		= {"nr", "wrath", "old"},
+			priority	= 2,
+		},
+		{	-- Ancient Dalaran
+			teleport 	= 120145,
+			portal 		= 120146,
+			alias		= {"crater", "alterac"},
+			priority	= 1,
+		},
+		{	-- Class Hall
+			teleport 	= 193759,
+			portal 		= nil, -- No portal to class hall
+			alias		= {"class"},
+		},
+		{ -- Oribos
+			teleport	= 344587,
+			portal		= 344597,
+			alias		= {"ob"}
+		},
+		{ -- Valdraken
+			teleport 	= 395277,
+			portal 		= 395289,
+			alias 		= {	"vd"}
+		}
+
+	},
 	Alliance	= {
 		{	-- Stormwind
 			teleport 	= 3561,
@@ -55,26 +85,12 @@ local MagePortSpells = {
 			teleport 	= 49359,
 			portal 		= 49360,
 			alias		= {"dustwallow"},
-		},
-		
+		},	
 		{	-- Shattrath
 			teleport 	= 33690,
 			portal 		= 33691,
 			alias		= {"outland"},
-		},
-		{	-- Dalaran
-			teleport 	= 53140,
-			portal 		= 53142,
-			alias		= {"nr", "wrath", "old"},
-			priority	= 2,
-		},
-		{	-- Ancient Dalaran
-			teleport 	= 120145,
-			portal 		= 120146,
-			alias		= {"crater", "alterac"},
-			priority	= 1,
-		},
-		
+		},				
 		{	-- Tol Barad
 			teleport 	= 88342,
 			portal 		= 88345,
@@ -97,29 +113,12 @@ local MagePortSpells = {
 			portal 		= 224871,
 			alias		= {"bi"},
 			priority	= 3,
-		},
-		{	-- Class Hall
-			teleport 	= 193759,
-			portal 		= nil, -- No portal to class hall
-			alias		= {"class"},
-		},
-		
+		},		
 		{	-- Boralus
 			teleport 	= 281403,
 			portal 		= 281400,
 			alias		= {"kt"},
 		},
-
-		{ -- Oribos
-			teleport	= 344587,
-			portal		= 344597,
-			alias		= {"ob"}
-		},
-		{ -- Valdraken
-			teleport 	= 395277,
-			portal 		= 395289,
-			alias 		= {	"vd"}
-		}
 	},
 	
 	Horde 		= {
@@ -154,24 +153,10 @@ local MagePortSpells = {
 			portal		= 35717,
 			alias		= {"outland"},
 		},
-		{	-- Dalaran
-			teleport	= 53140,
-			portal		= 53142,
-			alias		= {"nr", "wrath", "old"},
-			priority	= 2,
-		},
-		{	-- Ancient Dalaran
-			teleport	= 120145,
-			portal		= 120146,
-			alias		= {"crater", "alterac"},
-			priority	= 1,
-		},
-		
 		{	-- Tol Barad
 			teleport	= 88344,
 			portal		= 88346,
-		},
-		
+		},	
 		{	-- Vale of Eternal Blossoms
 			teleport	= 132627,
 			portal		= 132626,
@@ -182,39 +167,23 @@ local MagePortSpells = {
 			portal		= 176244,
 			alias		= {"ws", "ashran"},
 		},
-		
 		{	-- Dalaran - Broken Isles
 			teleport 	= 224869,
 			portal 		= 224871,
 			alias		= {"bi"},
 			priority	= 3,
 		},
-		{	-- Class Hall
-			teleport 	= 193759,
-			portal 		= nil, -- No portal to class hall
-			alias		= {"class"},
-		},
-		
 		{	-- Dazar'alor
 			teleport 	= 281404,
 			portal 		= 281402,
 			alias		= {"da"},
 		},
-
-		{ -- Oribos
-			teleport	= 344587,
-			portal		= 344597,
-			alias		= {"ob"}
-		},
-		{ -- Valdraken
-			teleport 	= 395277,
-			portal 		= 395289,
-			alias 		= {	"vd"}
-		}
 	},
 };
 
-local FACTION_NAME = UnitFactionGroup("player");
+local AvailablePorts = {}
+
+local FACTION_NAME = UnitFactionGroup("player"); 
 
 local MESSAGE_PATTERN = "|cffe8608fPortalMaster|r %s";
 function Addon:AddMessage(pattern, ...)
@@ -249,6 +218,12 @@ function Addon:OnEnable()
 		end
 		
 		Addon.NoResult = true;
+
+		-- Create available porttals by merging common & faction
+		AvailablePorts = MagePortSpells[FACTION_NAME]
+		for i = 1, #MagePortSpells["Common"] do
+			AvailablePorts[#AvailablePorts+1] = MagePortSpells["Common"][i]
+		end
 	end
 end
 
@@ -428,8 +403,8 @@ function Addon:SearchSpells(searchText, matchMode)
 	local matches = {};
 	
 	local tokens = { strsplit(" ", searchText) };
-	
-	for index, data in ipairs(MagePortSpells[FACTION_NAME]) do
+	-- for index, data in ipairs(MagePortSpells[FACTION_NAME]) do
+	for index, data in ipairs(AvailablePorts) do
 		local spellID = data.teleport;
 		if(matchMode == PM_MATCH_PORTAL and data.portal) then
 			spellID = data.portal;
