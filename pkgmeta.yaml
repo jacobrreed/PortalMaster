@@ -1,4 +1,4 @@
-package-as: PortalMasterTWW
+package-as: PortalMaster
 enable-nolib-creation: no
 
 manual-changelog:

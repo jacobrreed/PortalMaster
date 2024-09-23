@@ -1,3 +1,6 @@
+## 5.0.0
+* Updated for The War Within
+
 ## 4.0.0
 * Updated for Shadowlands
 
