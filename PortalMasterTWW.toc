@@ -1,7 +1,7 @@
 ## Interface: 100200
-## Title: PortalMaster
+## Title: PortalMasterTWW
 ## Notes: Helper for teleport and portal spell casting
-## Author: Sonaza, Sean111
+## Author: neonvoidx, Sonaza, Sean111
 ## Version: 5.0.0
 ## OptionalDeps: Ace3
 ## SavedVariablesPerCharacter: PortalMasterKeybindAlert

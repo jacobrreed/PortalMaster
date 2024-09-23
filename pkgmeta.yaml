@@ -1,6 +1,6 @@
-package-as: PortalMaster
+package-as: PortalMasterTWW
 enable-nolib-creation: no
-  
+
 manual-changelog:
   filename: CHANGELOG.md
   markup-type: markdown
