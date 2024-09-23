@@ -2,6 +2,8 @@
 Simple helper addon to cast mage teleport and portal spells in World of Warcraft.
 
 ## Description
+Fork of https://www.curseforge.com/wow/addons/portalmaster which is no longer maintained, tried opening a pull request but the author seems to be inactive.
+
 Tired of fiddly flyout menus to cast your portals? Simply not enough key bindings for all of your fancy teleports? Introducing PortalMaster, the new favorite of every mage.
 
 With this addon a mage can open up a simple dialog where they can type the name of the intended destination. Immediately when a match is found you can hit the enter once to confirm it is the right one and second time to cast it. Additionally only teleports and portals that you can cast are displayed.
